@@ -5,21 +5,27 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Fish  {
+public class Fish {
     private BufferedImage fish;
     private int x;
     private int y;
-    private int xval;
+    private int xVelocity;
+    private int yVelocity;
+    private int width;
+    private int height;
 
-    public Fish( int x, int y,File path) {
-        try{
+    public Fish(int x, int y,int width,int height, File path) {
+        try {
             fish = ImageIO.read(path);
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
+        this.width = width;
+        this.height = height;
         this.x = x;
         this.y = y;
-        this.xval = 2;
+        this.xVelocity = 1;
+        this.yVelocity = 1;
     }
 
     public int getX() {
@@ -38,21 +44,44 @@ public class Fish  {
         this.y = y;
     }
 
-    public int getXval() {
-        return xval;
+    public int getXVelocity() {
+        return xVelocity;
     }
 
-    public void setXval(int xval) {
-        this.xval = xval;
+    public void setXVelocity(int xVelocity) {
+        this.xVelocity = xVelocity;
     }
 
-    public void move(){
-        this.x += xval;
+    public int getYVelocity() {
+        return yVelocity;
+    }
+
+    public void setYVelocity(int yVelocity) {
+        this.yVelocity = yVelocity;
+    }
+
+    public void move() {
+            if (x >= Dimension.WIDTH - width  && xVelocity > 0) {
+                xVelocity *= -1;
+            }
+            if(x <= 0 && xVelocity < 0){
+                xVelocity *= -1;
+            }
+
+            if (y >= Dimension.HEIGHT - height && yVelocity > 0) {
+                yVelocity *= -1;
+            }
+            if(y <= 0 && yVelocity < 0){
+                yVelocity *= -1;
+            }
+
+            x += xVelocity;
+            y += yVelocity;
     }
 
 
-    public void draw(Graphics g){
-        g.drawImage(fish,x,y,100,100,null);
+    public void draw(Graphics g) {
+        g.drawImage(fish, x, y, width, height, null);
     }
 
 }
