@@ -37,21 +37,15 @@ final public class Test
         frame.setSize(300, 300);
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
-        moveIt();
+        Thread thread = new Thread(this::moveIt);
+        thread.start();
+
     }
 
     class DrawPanel extends JPanel
     {
-        private static final long serialVersionUID = 1L;
-
         public void paintComponent(Graphics g)
         {
-           /* g.setColor(Color.BLUE);
-            g.fillRect(0, 0, this.getWidth(), this.getHeight());
-            g.setColor(Color.RED);
-            g.fillRect(3, 3, this.getWidth() - 6, this.getHeight() - 6);
-            g.setColor(Color.WHITE);
-            g.fillRect(6, 6, this.getWidth() - 12, this.getHeight() - 12);*/
             g.setColor(Color.BLACK);
             g.fillRect(oneX, oneY, 6, 6);
         }
