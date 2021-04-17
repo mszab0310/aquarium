@@ -1,7 +1,11 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -18,6 +22,7 @@ final public class Test
     boolean down = true;
     boolean left = false;
     boolean right = true;
+    BufferedImage fish;
 
     public static void main(String... args)
     {
@@ -30,6 +35,11 @@ final public class Test
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         drawPanel = new DrawPanel();
+        try{
+            fish = ImageIO.read(new File("E:\\JavaSem2\\fishes\\fish.png"));
+        }catch (IOException e){
+            e.printStackTrace();
+        }
 
         frame.getContentPane().add(BorderLayout.CENTER, drawPanel);
 
@@ -47,7 +57,7 @@ final public class Test
         public void paintComponent(Graphics g)
         {
             g.setColor(Color.BLACK);
-            g.fillRect(oneX, oneY, 6, 6);
+            g.drawImage(fish,oneX,oneY,50,50,null);
         }
     }
 
