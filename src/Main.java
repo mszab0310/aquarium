@@ -1,18 +1,16 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-final public class Test {
+final public class Main {
 
     JFrame frame;
     DrawPanel drawPanel;
@@ -27,18 +25,26 @@ final public class Test {
     private List<Fish> fish;
 
     public static void main(String... args) {
-        new Test().go();
+        new Main().go();
     }
 
     private void go() {
         frame = new JFrame("Test");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         fish = new ArrayList<>();
         drawPanel = new DrawPanel();
+        List<String> images = Arrays.asList(
+                "crab.png", "daddyshark.png", "dementor.jfif", "fish.png", "octopus.png", "patric.png", "shark.png",
+                "spongebob.jpg", "submarine.png"
+        );
+        String path = "E:\\JavaSem2\\fishes\\images\\";
+
+
         Random random = new Random();
         for (int i = 0; i < 19; i++) {
             int dim = random.nextInt(40) + 50;
-            Fish f = new Fish(random.nextInt(450), random.nextInt(650), dim, dim, new File("E:\\JavaSem2\\fishes\\fish.png"));
+            Fish f = new Fish(random.nextInt(450), random.nextInt(650), dim, dim, new File(path + images.get(random.nextInt(images.size()))));
             f.setYVelocity(random.nextInt(10) - 5);
             f.setXVelocity(random.nextInt(10) - 5);
             fish.add(f);
